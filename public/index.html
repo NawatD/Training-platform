@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Internal Training Platform</title>
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+<!-- Login gate -->
+<div id="loginGate" class="login-wrap" hidden>
+  <div class="login-card">
+    <div class="brand-mark big">🎓</div>
+    <h1>Internal Training</h1>
+    <p class="sub">เข้าสู่ระบบด้วยบัญชี Microsoft 365 ของบริษัทเพื่อเริ่มเรียน</p>
+    <div class="login-err" id="loginErr" hidden></div>
+    <a class="start-btn" href="/api/auth/microsoft/login" style="display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none">
+      เข้าสู่ระบบด้วย Microsoft 365
+    </a>
+  </div>
+</div>
+
+<!-- App -->
+<div class="app" id="appRoot" hidden>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">🎓</div>
+      <div class="brand-text"><b>Training Hub</b><span>Internal Knowledge Platform</span></div>
+    </div>
+    <div class="nav-section-title">Business Domains</div>
+    <div id="domainNav"></div>
+    <div class="side-progress">
+      <div class="lbl" id="sideProgLabel">ความคืบหน้า</div>
+      <div class="bar-track"><div class="bar-fill" id="sideBarFill" style="width:0%"></div></div>
+      <div class="pct" id="sideBarPct">0 / 0 บทเรียนเรียนจบแล้ว</div>
+    </div>
+    <div class="side-user">
+      <div class="su-name" id="suName"></div>
+      <div class="su-actions">
+        <a href="/admin" id="adminLink" hidden>ผู้ดูแลระบบ</a>
+        <a href="#" id="logoutBtn">ออกจากระบบ</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main" id="mainArea"></main>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>

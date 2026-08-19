@@ -1,0 +1,52 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: itp-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-training}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-training_pass}
+      POSTGRES_DB: ${POSTGRES_DB:-training}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-training} -d ${POSTGRES_DB:-training}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "${DB_PORT:-5433}:5432"
+
+  app:
+    build: .
+    container_name: itp-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-training}:${POSTGRES_PASSWORD:-training_pass}@db:5432/${POSTGRES_DB:-training}
+      JWT_SECRET: ${JWT_SECRET:-change-this-secret-in-production}
+      STORAGE_DIR: /data/storage
+      MAX_UPLOAD_MB: ${MAX_UPLOAD_MB:-2048}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@example.com}
+      ADMIN_NAME: ${ADMIN_NAME:-System Admin}
+      AUTO_SEED: ${AUTO_SEED:-true}
+      MICROSOFT_CLIENT_ID: ${MICROSOFT_CLIENT_ID}
+      MICROSOFT_CLIENT_SECRET: ${MICROSOFT_CLIENT_SECRET}
+      MICROSOFT_TENANT_ID: ${MICROSOFT_TENANT_ID}
+      MICROSOFT_REDIRECT_URI: ${MICROSOFT_REDIRECT_URI:-http://localhost:8080/api/auth/microsoft/callback}
+      BACKUP_DIR: /data/backups
+      BACKUP_RETENTION_DAYS: ${BACKUP_RETENTION_DAYS:-3}
+      EXPORT_API_KEY: ${EXPORT_API_KEY}
+      PORT: 3000
+    volumes:
+      - media_data:/data/storage
+      - backup_data:/data/backups
+    ports:
+      - "${APP_PORT:-8080}:3000"
+
+volumes:
+  db_data:
+  media_data:
+  backup_data:

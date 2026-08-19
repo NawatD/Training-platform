@@ -1,0 +1,23 @@
+{
+  "name": "internal-training-platform",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "seed": "node seed/seed.js",
+    "seed:insurance": "node seed/seed-insurance.js"
+  },
+  "dependencies": {
+    "@azure/msal-node": "^5.5.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "pg": "^8.12.0"
+  }
+}

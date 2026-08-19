@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Internal Training</title>
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+<div id="denied" class="login-wrap" hidden>
+  <div class="login-card">
+    <div class="brand-mark big">🔒</div>
+    <h1>ต้องมีสิทธิ์ผู้ดูแลระบบ</h1>
+    <p class="sub">กรุณาเข้าสู่ระบบด้วยบัญชี admin</p>
+    <a class="start-btn" style="display:block;text-decoration:none;" href="/">ไปหน้าเข้าสู่ระบบ</a>
+  </div>
+</div>
+
+<div class="app" id="adminRoot" hidden>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">⚙️</div>
+      <div class="brand-text"><b>Admin Console</b><span>จัดการเนื้อหาการอบรม</span></div>
+    </div>
+    <div class="nav-section-title">เมนู</div>
+    <div id="adminNav"></div>
+    <div class="side-user">
+      <div class="su-name" id="suName"></div>
+      <div class="su-actions">
+        <a href="/">หน้าผู้เรียน</a>
+        <a href="#" id="logoutBtn">ออกจากระบบ</a>
+      </div>
+    </div>
+  </aside>
+  <main class="main" id="adminMain"></main>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop" hidden>
+  <div class="modal" id="modalBox"></div>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>
